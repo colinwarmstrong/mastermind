@@ -9,7 +9,7 @@ To do so, open your terminal and enter: `gem install colorize`
 This will install the colorize gem and allow the mastermind program to properly display colored text.
 
 ##### Step 2.  Clone the mastermind repository to your computer
-While viewing my [mastermind repository on GitHub](https://github.com/colinwarmstrong/mastermind), locate the green "clone or download" pulldown menu. Open the menu and copy the URL displayed in the "Clone with HTTPS" section.
+While viewing my [mastermind repository on GitHub](https://github.com/colinwarmstrong/mastermind), locate the green "clone or download" pulldown menu: ![alt text](https://imgur.com/a/J4c3RzT) Open the menu and copy the URL displayed in the "Clone with HTTPS" section.
 
 Alternatively, I have provided the URL for you to copy here: `https://github.com/colinwarmstrong/mastermind.git`
 
