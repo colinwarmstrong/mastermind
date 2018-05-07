@@ -3,6 +3,7 @@ require './lib/logic_class.rb'
 require './lib/prompt_class.rb'
 require './lib/quit_class.rb'
 require 'colorize'
+require 'csv'
 
 class Engine
 
@@ -76,17 +77,18 @@ class Engine
 
   def congrats
     finish = Time.new
-    completion_time = (finish - @start).to_i
+    @completion_time = (finish - @start).to_i
     c = Colorizer.new
     print "#{'C'.red}#{'O'.green}#{'N'.blue}#{'G'.yellow}#{'R'.light_red}#{'A'.magenta}#{'T'.red}#{'U'.green}"
     print "#{'L'.blue}#{'A'.yellow}#{'T'.light_red}#{'I'.magenta}#{'O'.red}#{'N'.green}#{'S'.blue}#{'!'.yellow} "
     puts "You solved the #{@level_color} sequence '#{c.colorize_flow(@code, @level)}'"
-    puts "in #{@attempts} guesses over #{completion_time / 60} minutes, #{completion_time % 60} seconds."
+    puts "in #{@attempts} guesses over #{@completion_time / 60} minutes, #{@completion_time % 60} seconds."
+    leaderboard_writer
     end_game
   end
 
   def end_game
-    puts "\nDo you want to (p)lay again or (q)uit?"
+    puts "\nDo you want to (p)lay again, (q)uit?, or view the (l)eaderboard?"
     pr = Prompt.new
     end_game_choice = pr.prompter
     end_game_flow(end_game_choice)
@@ -100,6 +102,9 @@ class Engine
     elsif end_game_choice == 'q' || end_game_choice == 'quit'
       q = Quit.new
       q.quitter
+    elsif end_game_choice == 'l' || end_game_choice == 'leaderboard'
+      leaderboard_reader
+      end_game
     else
       puts "Invalid response. Try again."
       end_game
@@ -117,6 +122,29 @@ class Engine
 
   def attempts_counter
     @attempts += 1
+  end
+
+  def leaderboard_writer
+    puts "\n"
+    puts "Please enter your name for the leaderboard:"
+    pr = Prompt.new
+    name = pr.prompter
+    c = Colorizer.new
+    CSV.open("./lib/leaderboard.csv", "ab") do |leaderboard|
+      leaderboard << ["#{@attempts} attempts:","#{name.capitalize} guessed", "'#{c.colorize_flow(@code, @level)}'",
+          "over #{@completion_time/60} minutes and #{@completion_time % 60} seconds."]
+    end
+  end
+
+  def leaderboard_reader
+    puts "\n"
+    puts "Here is the current leaderboard:"
+    leaders = CSV.open("./lib/leaderboard.csv")
+    leaders_sorted = leaders.sort
+    leaders_sorted.each do |leader|
+      leader_string = leader.join(" ")
+      puts leader_string
+    end
   end
 
 end
