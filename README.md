@@ -21,7 +21,7 @@ This will clone the remote mastermind repository to your local directory.
 
 ### Running the Game
 
-After installing the colorize gem and cloning the mastermind repository, make sure you are in the proper working directory and enter `ruby mastermind.rb`. This will start a new game of Mastermind.  Follow the given prompts to make your way through the game.
+After installing the colorize gem and cloning the mastermind repository, make sure you are in the proper working directory and enter `ruby mastermind.rb`. This will start a new game of Mastermind.  Follow the given prompts to make your way through the game. Make sure your terminal is at least 74 columns wide to ensure the text is displayed properly.
 
 ### Game Instructions
 
