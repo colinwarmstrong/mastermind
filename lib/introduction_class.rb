@@ -5,6 +5,7 @@ require './lib/quit_class.rb'
 class Introduction
 
   def welcome
+    print `clear`
     print "Welcome to #{'M'.red}#{'A'.green}#{'S'.blue}#{'T'.yellow}#{'E'.light_red}"
     puts "#{'R'.magenta}#{'M'.red}#{'I'.green}#{'N'.blue}#{'D'.yellow}"
     puts "\n"
