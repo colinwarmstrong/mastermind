@@ -1,4 +1,4 @@
-require './lib/introduction_class.rb'
+require './lib/introduction.rb'
 
 i = Introduction.new
 i.welcome
