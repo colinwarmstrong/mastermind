@@ -1,11 +1,10 @@
 class Logic
-
   def code_generator(code_length, color_array)
     code_array = []
     code_length.times do
       code_array << color_array.sample
     end
-    code_array.join("")
+    code_array.join('')
   end
 
   def correct_color_counter(guess, code)
@@ -29,11 +28,8 @@ class Logic
     code_array = code.split(//)
     position_count = 0
     guess_array.each_with_index do |element, index|
-      if element == code_array[index]
-        position_count += 1
-      end
+      position_count += 1 if element == code_array[index]
     end
     position_count
   end
-
 end

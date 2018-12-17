@@ -1,9 +1,8 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-require './lib/introduction_class.rb'
+require './lib/introduction.rb'
 
 class IntroductionTest < Minitest::Test
-
   def test_it_exists
     i = Introduction.new
     assert_instance_of Introduction, i
@@ -37,5 +36,4 @@ class IntroductionTest < Minitest::Test
     message = i.instructions
     assert_nil message
   end
-
 end

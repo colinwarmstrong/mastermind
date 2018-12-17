@@ -1,10 +1,9 @@
 require "minitest/autorun"
 require "minitest/pride"
-require "./lib/difficulty_class.rb"
-require "./lib/engine_class.rb"
+require "./lib/difficulty.rb"
+require "./lib/engine.rb"
 
 class DifficultyTest < Minitest::Test
-
   def test_it_exists
     d = Difficulty.new
     assert_instance_of Difficulty, d
@@ -40,5 +39,4 @@ class DifficultyTest < Minitest::Test
     input = d.advanced
     assert_equal e.level, "advanced"
   end
-
 end

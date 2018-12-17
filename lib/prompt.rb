@@ -1,8 +1,6 @@
 class Prompt
-
   def prompter
-    print "> "
+    print '> '
     gets.chomp.downcase
   end
-
 end

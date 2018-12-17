@@ -1,6 +1,6 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-require './lib/prompt_class.rb'
+require './lib/prompt.rb'
 
 class PromptTest < Minitest::Test
 
@@ -15,5 +15,4 @@ class PromptTest < Minitest::Test
     input = pr.prompter
     assert_instance_of String, input
   end
-
 end

@@ -1,9 +1,8 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-require './lib/quit_class.rb'
+require './lib/quit.rb'
 
 class QuitTest < Minitest::Test
-
   def test_it_exists
     q = Quit.new
     assert_instance_of Quit,  q
@@ -14,5 +13,4 @@ class QuitTest < Minitest::Test
     q = Quit.new
     assert_nil q
   end
-
 end

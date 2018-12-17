@@ -1,9 +1,8 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-require './lib/logic_class.rb'
+require './lib/logic.rb'
 
 class LogicTest < Minitest::Test
-
   def test_it_exists
     l = Logic.new
     assert_instance_of Logic, l
@@ -41,5 +40,4 @@ class LogicTest < Minitest::Test
     correct_position_counter = l.correct_position_counter("rrrb", "rybr")
     assert_equal 1, correct_position_counter
   end
-
 end

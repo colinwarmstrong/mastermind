@@ -1,10 +1,9 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-require './lib/engine_class.rb'
-require './lib/logic_class.rb'
+require './lib/engine.rb'
+require './lib/logic.rb'
 
 class EngineTest < Minitest::Test
-
   def test_it_exists
     e = Engine.new
     assert_instance_of Engine, e
@@ -77,5 +76,4 @@ class EngineTest < Minitest::Test
     e.attempt_counter
     assert_equal 1, @attempts
   end
-
 end

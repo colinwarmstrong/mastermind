@@ -1,10 +1,7 @@
 class Quit
-
   def quitter
     print `clear`
-    puts "Goodbye."
-    puts "\n"
+    puts "Goodbye.\n"
     exit
   end
-
 end

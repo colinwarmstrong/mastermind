@@ -1,12 +1,11 @@
-require './lib/colorizer_class.rb'
-require './lib/logic_class.rb'
-require './lib/prompt_class.rb'
-require './lib/quit_class.rb'
+require './lib/colorizer.rb'
+require './lib/logic.rb'
+require './lib/prompt.rb'
+require './lib/quit.rb'
 require 'colorize'
 require 'csv'
 
 class Engine
-
   attr_writer :level,
               :level_color,
               :code_length,
@@ -16,7 +15,7 @@ class Engine
 
   def initialize
     @attempts = 0
-    @history = []
+    @history  = []
   end
 
   def play
@@ -24,8 +23,8 @@ class Engine
     @code = l.code_generator(@code_length, @color_array)
     puts "I have generated a random #{@level} sequence with #{@code_length} elements made up of "
     puts "#{@number_of_colors} colors: #{@color_string_long}."
-    puts "At any time, use (h)istory to view your previous guesses and results,"
-    puts "(c)heat to view the sequence, and (q)uit to quit the game."
+    puts 'At any time, use (h)istory to view your previous guesses and results,'
+    puts '(c)heat to view the sequence, and (q)uit to quit the game.'
     puts "\n"
     @start = Time.new
     guess_prompt
@@ -106,13 +105,13 @@ class Engine
       leaderboard_reader
       end_game
     else
-      puts "Invalid response. Try again."
+      puts 'Invalid response. Try again.'
       end_game
     end
   end
 
   def print_history
-    puts "Here are your previous guesses and results:"
+    puts 'Here are your previous guesses and results:'
     @history.each do |guess|
       puts guess
     end
@@ -126,25 +125,28 @@ class Engine
 
   def leaderboard_writer
     puts "\n"
-    puts "Please enter your name for the leaderboard:"
+    puts 'Please enter your name for the leaderboard:'
     pr = Prompt.new
     name = pr.prompter
     c = Colorizer.new
-    CSV.open("./lib/leaderboard.csv", "ab") do |leaderboard|
-      leaderboard << ["#{@attempts} attempts:","#{name.capitalize} guessed", "'#{c.colorize_flow(@code, @level)}'",
-          "over #{@completion_time/60} minutes and #{@completion_time % 60} seconds."]
+    CSV.open('./lib/leaderboard.csv', 'ab') do |leaderboard|
+      if @attempts < 100 && @completion_time / 60 < 100
+      leaderboard << ["#{name.capitalize} solved", "'#{c.colorize_flow(@code, @level)}' in", @attempts.to_s.rjust(2, "0"),
+                      "attempts over", "#{(@completion_time/60).to_s.rjust(2, "0")}m","#{(@completion_time % 60).to_s.rjust(2, "0")}s."]
+      end
     end
   end
 
   def leaderboard_reader
     puts "\n"
-    puts "Here is the current leaderboard:"
-    leaders = CSV.open("./lib/leaderboard.csv")
-    leaders_sorted = leaders.sort
-    leaders_sorted.each do |leader|
-      leader_string = leader.join(" ")
-      puts leader_string
+    puts '=== TOP 10 ==='
+    leaders = CSV.read('./lib/leaderboard.csv')
+    leaders_sorted = leaders.sort_by { |leader| leader[2] }
+    leaders_sorted.each_with_index do |leader, index|
+      if index < 10
+        leader_string = leader.join(' ')
+        puts "#{index + 1}. #{leader_string}"
+      end
     end
   end
-
 end
